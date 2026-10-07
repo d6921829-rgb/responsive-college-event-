@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>College Event Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">🎓 CampusEvents</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav id="nav" class="nav">
+        <a href="#events">Events</a>
+        <a href="#registrations">My Registrations</a>
+        <a href="#add">Add Event</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Discover. Register. Participate.</h1>
+        <p>All your college fests, workshops, hackathons and sports events in one place.</p>
+        <a href="#events" class="btn btn-primary">Browse Events</a>
+        <div class="stats">
+          <div><strong id="statEvents">0</strong><span>Events</span></div>
+          <div><strong id="statSeats">0</strong><span>Seats left</span></div>
+          <div><strong id="statMine">0</strong><span>Your registrations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="container section">
+      <h2>Upcoming Events</h2>
+      <div class="filters">
+        <input type="search" id="search" placeholder="Search events or venues…" aria-label="Search events">
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="all">All categories</option>
+        </select>
+        <select id="sortBy" aria-label="Sort events">
+          <option value="date">Sort: Date</option>
+          <option value="seats">Sort: Seats left</option>
+          <option value="title">Sort: Title</option>
+        </select>
+      </div>
+      <div id="eventGrid" class="grid"></div>
+      <p id="emptyMsg" class="empty" hidden>No events match your search.</p>
+    </section>
+
+    <section id="registrations" class="container section">
+      <h2>My Registrations</h2>
+      <div id="regList" class="reg-list"></div>
+    </section>
+
+    <section id="add" class="container section">
+      <h2>Add an Event</h2>
+      <form id="addForm" class="card form-grid" novalidate>
+        <label>Title
+          <input name="title" required maxlength="80">
+        </label>
+        <label>Category
+          <select name="category" required>
+            <option>Technical</option>
+            <option>Cultural</option>
+            <option>Sports</option>
+            <option>Workshop</option>
+            <option>Seminar</option>
+          </select>
+        </label>
+        <label>Date
+          <input type="date" name="date" required>
+        </label>
+        <label>Time
+          <input type="time" name="time" required>
+        </label>
+        <label>Venue
+          <input name="venue" required maxlength="60">
+        </label>
+        <label>Total seats
+          <input type="number" name="seats" min="1" max="5000" required>
+        </label>
+        <label class="full">Description
+          <textarea name="description" rows="3" maxlength="300" required></textarea>
+        </label>
+        <p class="form-msg full" id="addMsg" role="status"></p>
+        <button class="btn btn-primary full" type="submit">Add Event</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> CampusEvents · Built for students</div>
+  </footer>
+
+  <!-- Registration modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <h3 id="modalTitle">Register</h3>
+      <p id="modalSub" class="muted"></p>
+      <form id="regForm" novalidate>
+        <label>Full name
+          <input name="name" required maxlength="60" autocomplete="name">
+        </label>
+        <label>Roll number
+          <input name="roll" required maxlength="20">
+        </label>
+        <label>College email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label>Department
+          <select name="dept" required>
+            <option value="">Select…</option>
+            <option>CSE</option><option>ECE</option><option>EEE</option>
+            <option>MECH</option><option>CIVIL</option><option>IT</option>
+            <option>MBA</option><option>Other</option>
+          </select>
+        </label>
+        <p class="form-msg" id="regMsg" role="status"></p>
+        <button class="btn btn-primary" type="submit">Confirm Registration</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
